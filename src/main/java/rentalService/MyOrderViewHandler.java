@@ -105,4 +105,23 @@ public class MyOrderViewHandler {
         }
 
     }
+
+    @StreamListener(KafkaProcessor.INPUT)
+    public void whenInstallScheduled_then_UPDATE_1(@Payload InstallScheduled installScheduled){
+
+        if(installScheduled.isMe()){
+
+            // view 객체 조회
+            List<MyOrder> myOrderList = myOrderRepository.findByRentalId(installScheduled.getInstallId());
+            for(MyOrder myOrder : myOrderList){
+                // view 객체에 이벤트의 eventDirectValue 를 set 함
+                myOrder.setRentalStatus(installScheduled.getStatus());
+                myOrder.setDeliveryStatus(installScheduled.getStatus());
+                // view 레파지 토리에 save
+                myOrderRepository.save(myOrder);
+            }
+
+        }
+
+    }
 }
