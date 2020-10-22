@@ -105,7 +105,7 @@ public class MyOrderViewHandler {
         }
 
     }
-
+/*
     @StreamListener(KafkaProcessor.INPUT)
     public void whenInstallScheduled_then_UPDATE_1(@Payload InstallScheduled installScheduled){
 
@@ -124,4 +124,6 @@ public class MyOrderViewHandler {
         }
 
     }
+
+ */
 }
